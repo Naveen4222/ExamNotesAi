@@ -1,7 +1,23 @@
-const App = ()=>{
-  return(
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./Pages/Home";
+import Auth from "./Pages/Auth";
+
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<Home/>
+  },
+  {
+    path:"/Auth",
+    element:<Auth/>
+  }
+])
+const App = () => {
+
+  return (
     <>
-    <h1 className="text-3xl font-bold underline">Hello App</h1>
+      <RouterProvider router={router}></RouterProvider>
     </>
   )
 }
