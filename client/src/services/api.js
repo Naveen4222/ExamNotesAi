@@ -1,6 +1,12 @@
 import { serverUrl } from "../App";
 import axios from "axios";
-export const getCurrentUser = async () => {
+import { setUserData } from "../Redux/userSlice";
+import { useDispatch } from "react-redux";
+
+
+
+  
+export const getCurrentUser = async (dispatch) => {
     try {
         const result = await axios.get(
             "http://localhost:5001/api/user/currentUser",
@@ -8,7 +14,9 @@ export const getCurrentUser = async () => {
                 withCredentials: true,
             }
         );
-        console.log(result.data);
+       
+        dispatch(setUserData(result.data));
+        console.log("Dispatched");
 
     } catch (error) {
         console.log(error);
