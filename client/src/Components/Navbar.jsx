@@ -1,14 +1,30 @@
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from "motion/react"
 import logo from "../assets/logo.png"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { serverUrl } from '../App';
+import { setUserData } from '../Redux/userSlice';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 const Navbar = () => {
     const { userData } = useSelector((state) => state.user);
     const credits = userData.credits;
 
     const [showCredits, setShowCredits] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const handleSignOut = async()=>{
+        try {
+            await axios.get(serverUrl + "/api/auth/logout",
+            {withCredential:true} );
+            dispatch(setUserData(null));
+            navigate("/auth")
+        } catch (error) {
+            console.log("logout", error);
+        }
+    }
 
     return (
         <>
@@ -17,12 +33,12 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5 }}
                 className='relative z-20 mx-6 mt-6
-        rounded-2xl
-        bg-gradient-to-br from-black/90 via-black/80 to-black/90
-        backdrop-blue-2xl
-        border border-white/10
-        shadow-[0_22px_55px_rgbs(0,0,0,0.75)]
-        flex items-center justify-between px-8 py-4'>
+                rounded-2xl
+                bg-gradient-to-br from-black/90 via-black/80 to-black/90
+                backdrop-blue-2xl
+                border border-white/10
+                shadow-[0_22px_55px_rgbs(0,0,0,0.75)]
+                flex items-center justify-between px-8 py-4'>
                 {/* LeftSide */}
                 <div className='flex items-center gap-3'>
                     <img src={logo} alt="examnotes" className='w-9 h-9' />
@@ -33,7 +49,7 @@ const Navbar = () => {
                 <div className='flex items-center gap-6 relative'>
                     <div className='relative'>
                         <motion.div
-                            onClick={() => {setShowCredits(!showCredits);setShowProfile(false)}}
+                            onClick={() => { setShowCredits(!showCredits); setShowProfile(false) }}
                             whileHover={{ scale: 1.07 }}
                             whileTap={{ scale: 0.97 }}
                             className='flex items-center gap-1
@@ -96,7 +112,7 @@ const Navbar = () => {
                     </div>
                     <div className='relative'>
                         <motion.div
-                            onClick={() => {setShowProfile(!showProfile); setShowCredits(false)}}
+                            onClick={() => { setShowProfile(!showProfile); setShowCredits(false) }}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.97 }}
                             className='flex items-center gap-1
@@ -126,10 +142,11 @@ const Navbar = () => {
                                 border border-white/10
                                 shadow-[0_22px_55px_rgbs(0,0,0,0.75)]
                                 p-4 text-white'>
-                                    <MenuItem text="History" onClick={()=>setShowProfile(false)}/>
+                                    <MenuItem text="History" onClick={() => setShowProfile(false)} />
                                     <div className='h-px bg-white/10 mx-3'></div>
-                                   <MenuItem text ="Sign Out" red onClick={()=>setShowProfile(false)}/>
-                                   
+                                    <MenuItem text="Sign Out" red onClick= {handleSignOut} />
+                           
+
                                 </motion.div>
                             }
                         </AnimatePresence>
@@ -140,18 +157,17 @@ const Navbar = () => {
     )
 }
 
-function MenuItem ({onClick, text, red}){
-    return(
-        <div 
-        onClick={onClick}
-        className={`
+function MenuItem({ onClick, text, red }) {
+    return (
+        <div
+            onClick={onClick}
+            className={`
         w-full text-left px-5 py-3 text-sm rounded-lg
-        transition-colors
-        ${
-            red
-            ? "text-red-400 hover:bg-red-500/10"
-            : "text-gray-200 hover:bg-white/10"
-        }`}>
+        transition-colors cursor-pointer
+        ${red
+                    ? "text-red-400 hover:bg-red-500/10"
+                    : "text-gray-200 hover:bg-white/10"
+                }`}>
             {text}
 
         </div>
