@@ -1,24 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, replace, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home";
 import Auth from "./Pages/Auth";
 import { useEffect } from "react";
 import { getCurrentUser } from "./services/api";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-export const serverUrl = "http://localhost:5001"
+export const serverUrl = "http://localhost:5001";
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "/Auth",
-    element: <Auth />
-  }
-])
+
+
 const App = () => {
 
 
@@ -27,6 +20,19 @@ const App = () => {
   useEffect(() => {
     getCurrentUser(disptach);
   }, [disptach])
+
+
+  const userData = useSelector((state) => state.user?.userData);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element:userData? <Home />: <Navigate to="/auth" replace/>    },
+    {
+      path: "/Auth",
+      element: userData ? <Navigate to="/" replace /> : <Auth />
+    },
+  ])
 
 
 
