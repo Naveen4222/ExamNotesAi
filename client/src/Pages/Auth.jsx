@@ -3,19 +3,28 @@ import { motion } from "motion/react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utlis/firebox';
+import axios from "axios";
+import { serverUrl } from '../App';
 
 
 
 const Auth = () => {
 
-  const handleGoogleAuth = async()=>{
+  const handleGoogleAuth = async () => {
     try {
-     
-      const response = await signInWithPopup(auth,provider)
+
+      const response = await signInWithPopup(auth, provider)
       const User = response.user;
       const name = User.displayName;
       const email = User.email;
+
+      const result = await axios.post(serverUrl + "/api/auth/google", { name, email }, {
+        withCredentials: true
+      })
+      console.log(result.data);
     } catch (error) {
+      console.log("Error code:", error.code);
+      console.log("Error message:", error.message);
       console.log(error);
     }
   }
@@ -53,7 +62,7 @@ const Auth = () => {
               Unlock Smart <br />AI notes
             </h1>
             <motion.button
-            onClick={handleGoogleAuth}
+              onClick={handleGoogleAuth}
               whileHover={{
                 y: -10,
                 rotateX: 8,
