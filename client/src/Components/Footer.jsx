@@ -92,6 +92,11 @@ export const Footer = () => {
 
                     </div>
                 </div>
+                <div className="my-6 h-px bg-white/10"/>
+                <p className="text-center text-xs text-gray-500">
+                    c{new Date().getFullYear()} ExamNotes AI. All rights reserved.
+                </p>
+                
             </motion.div>
         </>
     )
