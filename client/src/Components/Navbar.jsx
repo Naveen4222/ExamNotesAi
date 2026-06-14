@@ -95,8 +95,8 @@ const Navbar = () => {
                                         diagrams & PDFs
                                     </p>
                                     <button
-                                        onClick={() => setShowCredits(false)}
-                                        className='w-full py02 rounded-lg
+                                        onClick={() => {setShowCredits(false);navigate("/pricing")}}
+                                        className='w-full py-2 rounded-lg
                                 bg-gradient-to-br from-white to-gray-200
                                 text-black font-semibold
                                 hover:opacity-90'>
@@ -142,7 +142,7 @@ const Navbar = () => {
                                 border border-white/10
                                 shadow-[0_22px_55px_rgbs(0,0,0,0.75)]
                                 p-4 text-white'>
-                                    <MenuItem text="History" onClick={() => setShowProfile(false)} />
+                                    <MenuItem text="History" onClick={() =>{ setShowProfile(false);navigate("/history")}} />
                                     <div className='h-px bg-white/10 mx-3'></div>
                                     <MenuItem text="Sign Out" red onClick= {handleSignOut} />
                            

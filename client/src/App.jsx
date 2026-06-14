@@ -6,6 +6,9 @@ import { getCurrentUser } from "./services/api";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import Pricing from "./Pages/Pricing";
+import Notes from "./Pages/Notes";
+import History from "./Pages/History";
 
 export const serverUrl = "http://localhost:5001";
 
@@ -32,6 +35,18 @@ const App = () => {
       path: "/Auth",
       element: userData ? <Navigate to="/" replace /> : <Auth />
     },
+    {
+      path:"/notes",
+      element:<Notes/>
+    },
+    {
+      path:"history",
+      element:<History/>
+    },
+    {
+      path:"pricing",
+      element:<Pricing/>
+    }
   ])
 
 
