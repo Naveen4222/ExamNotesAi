@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from "motion/react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import TopicFrom from '../Components/TopicFrom'
 
 
 
@@ -9,6 +10,11 @@ const Notes = () => {
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.user);
   const credits = userData?.credits;
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [result, setResult] = useState(null);
+
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 px-6 py-8'>
@@ -37,7 +43,7 @@ const Notes = () => {
           rounded-full px-4 py02
           bg-white/10
           border border-white/20
-          text-white text-sm' onClick={()=>navigate("/pricing")}>
+          text-white text-sm' onClick={() => navigate("/pricing")}>
             <span className='text-xl'>
               🔅
             </span>
@@ -54,9 +60,9 @@ const Notes = () => {
 
             </motion.span>
           </button>
-          <button 
-          onClick={()=> navigate("/history")}
-          className='px-4 py-2 rounded-full
+          <button
+            onClick={() => navigate("/history")}
+            className='px-4 py-2 rounded-full
           text-sm font-medium
           bg-white/10
           text-white
@@ -67,7 +73,32 @@ const Notes = () => {
         </div>
 
       </motion.header>
+      <motion.div className='mb-12'>
 
+        <TopicFrom loading={loading}
+          setResult={setResult}
+          setLoading={setLoading}
+          setError={setError} />
+
+      </motion.div>
+
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+
+        className='h-64
+      rounded-2xl
+      flex flex-col items-center justify-center
+      bg-white/60 backdrop-blur-lg
+      border border-dashed border-gray-300
+      text-gray-500
+      shadow-inner'>
+        <span className="text-4xl mb-3">
+          📘
+        </span>
+        <p className='text-sm'>
+          Generated notes will appear here
+        </p>
+      </motion.div>
 
 
 
