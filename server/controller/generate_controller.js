@@ -39,7 +39,7 @@ export const generateNotes = async (req, res) => {
         });
 
         const aiResponse = await generateGeminiResponse(prompt);
-        console.log(aiResponse);
+        
 
       
 
@@ -55,8 +55,8 @@ export const generateNotes = async (req, res) => {
 
         });
 
-        user.credits = 10;
-        if (user.credits <= 10) user.isCreditAvailable = false;
+        // user.credits = 10;
+        // if (user.credits <= 10) user.isCreditAvailable = false;
 
         if (!Array.isArray(user.notes)) {
             user.notes = [];

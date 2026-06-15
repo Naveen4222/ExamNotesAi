@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
+import { generateNotes } from '../services/api';
 
 
 const TopicFrom = ({ setResult, setLoading, loading, setError }) => {
@@ -11,6 +12,35 @@ const TopicFrom = ({ setResult, setLoading, loading, setError }) => {
   const [revisionMode, setRevisionMode] = useState("false");
   const [includeDiagram, setIncludeDiagram] = useState("false");
   const [includeChart, setIncludeChart] = useState("false");
+
+  const handleSumbit = async () => {
+
+    if (!topic.trim()) {
+      setError("Please enter the topic")
+      return;
+    }
+    setError("");
+    setLoading(true);
+    setResult(null);
+    try {
+      const result = await generateNotes({
+        topic,
+        classLevel,
+        examType,
+        revisionMode,
+        includeChart,
+        includeDiagram}); 
+
+        setResult(result.data);
+        setLoading(false);
+
+
+    } catch (error) {
+      console.log(error);
+      setError("Failed to fetch notes from server");
+      setLoading(false);
+    }
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -55,21 +85,22 @@ const TopicFrom = ({ setResult, setLoading, loading, setError }) => {
         <Toggle lable="Include Chart" checked={includeChart} onChange={() => setIncludeChart(!includeChart)} />
       </div>
 
-      <motion.button 
-      whileHover={!loading ? {scale: 1.02}: {}}
-      whileTap={!loading ? {scale : 0.95}:{}}
-      disabled={loading }
-      className={`
+      <motion.button
+        onClick={handleSumbit }
+        whileHover={!loading ? { scale: 1.02 } : {}}
+        whileTap={!loading ? { scale: 0.95 } : {}}
+        disabled={loading}
+        className={`
         w-full mt-4
         py-3 rounded-xl
         font-semibold
         flex items-center justify-center gap-3
         transition
         ${loading
-          ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-          : "bg-gradient-to-br from-white to-gray-200 text-black shadow-[0_15px_35px_rgba(0,0,0,0.4)]"
-        }`}>
-          {loading ? "Generating Notes..." : "Generate Notes"} 
+            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+            : "bg-gradient-to-br from-white to-gray-200 text-black shadow-[0_15px_35px_rgba(0,0,0,0.4)]"
+          }`}>
+        {loading ? "Generating Notes..." : "Generate Notes"}
 
       </motion.button>
 
