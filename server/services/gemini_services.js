@@ -5,11 +5,11 @@ const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemi
 export const generateGeminiResponse = async (prompt) => {
 
     try {
-        const response = await fetch(`${Gemini_URL} ? ${process.env.GEMINI_API_KEY}`,
+        const response = await fetch(`${Gemini_URL}?key=${process.env.GEMINI_API_KEY}`,
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "appliation/json"
+                    "Content-Type": "application/json"
 
                 },
                 body: JSON.stringify({
@@ -41,8 +41,8 @@ export const generateGeminiResponse = async (prompt) => {
         }
 
         const cleanText = text
-            .replace(/...json/g, "")
-            .replace(/.../g, "")
+            .replace(/```json/g, "")
+            .replace(/```/g, "")
             .trim();
 
 

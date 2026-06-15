@@ -6,6 +6,7 @@ import GoogleAuth from "./routes/auth_route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user.route.js";
+import notesRouter from "./routes/generateNote_route.js";
 
 const PORT = process.env.PORT || 5002;
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", GoogleAuth);
 app.use("/api/user", userRouter);
+app.use("/api/notes", notesRouter)
 
 
 ConnectDb(app.listen(PORT, ()=>{
