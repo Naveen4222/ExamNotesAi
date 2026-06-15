@@ -21,13 +21,13 @@ export const generateNotes = async (req, res) => {
             return res.status(400).json({ msg: "User is not find" })
         }
 
-        if (user.credits < 10) {
-            user.isCreditAvailable = false;
-            await user.save();
-            return res.status(403).json({
-                message: "Insufficient credits",
-            })
-        }
+        // if (user.credits < 10) {
+        //     user.isCreditAvailable = false;
+        //     await user.save();
+        //     return res.status(403).json({
+        //         message: "Insufficient credits",
+        //     })
+        // }
 
         const prompt = buildPrompt({
             topic,

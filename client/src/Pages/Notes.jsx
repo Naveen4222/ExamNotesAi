@@ -3,7 +3,8 @@ import { motion } from "motion/react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import TopicFrom from '../Components/TopicFrom'
-
+import FinalResult from '../Components/FinalResult'
+import SideBar from '../Components/sideBar'
 
 
 const Notes = () => {
@@ -101,7 +102,8 @@ const Notes = () => {
         </p>
       </motion.div>}
 
-
+      <FinalResult/>
+      <sideBar/>
 
     </div>
   )

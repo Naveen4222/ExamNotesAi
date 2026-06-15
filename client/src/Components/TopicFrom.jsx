@@ -12,6 +12,7 @@ const TopicFrom = ({ setResult, setLoading, loading, setError }) => {
   const [revisionMode, setRevisionMode] = useState("false");
   const [includeDiagram, setIncludeDiagram] = useState("false");
   const [includeChart, setIncludeChart] = useState("false");
+    
 
   const handleSumbit = async () => {
 
@@ -31,8 +32,16 @@ const TopicFrom = ({ setResult, setLoading, loading, setError }) => {
         includeChart,
         includeDiagram}); 
 
-        setResult(result.data);
+        console.log(result);
+
+        setResult(result);
         setLoading(false);
+        setClassLevel("")
+        setTopic("")
+        setExamType("")
+        setIncludeChart(false);
+        setRevisionMode(false);
+        setIncludeDiagram(false);
 
 
     } catch (error) {
