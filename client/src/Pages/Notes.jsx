@@ -82,7 +82,8 @@ const Notes = () => {
 
       </motion.div>
 
-      <motion.div
+     { !result && 
+     <motion.div
         whileHover={{ scale: 1.02 }}
 
         className='h-64
@@ -98,7 +99,7 @@ const Notes = () => {
         <p className='text-sm'>
           Generated notes will appear here
         </p>
-      </motion.div>
+      </motion.div>}
 
 
 
