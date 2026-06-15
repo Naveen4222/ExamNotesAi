@@ -15,8 +15,9 @@ const Navbar = () => {
     const [showProfile, setShowProfile] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
     const handleSignOut = async()=>{
-        try {
+        try { 
             await axios.get(serverUrl + "/api/auth/logout",
             {withCredential:true} );
             dispatch(setUserData(null));
