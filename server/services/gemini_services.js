@@ -45,14 +45,14 @@ export const generateGeminiResponse = async (prompt) => {
             .replace(/```/g, "")
             .trim();
 
-
+        console.log("Gemini Text:");
         console.log(cleanText);
-
+        
         return JSON.parse(cleanText);
 
     } catch (error) {
-        console.log("gemini reponse", error.message)
-        throw new Error("Gemini API fetch failed");
+       console.error("Gemini Error:", error.message);
+    throw new Error(error.message);
     }
 
 
