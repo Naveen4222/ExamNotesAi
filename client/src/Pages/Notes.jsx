@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import TopicFrom from '../Components/TopicFrom'
 import FinalResult from '../Components/FinalResult'
-import SideBar from '../Components/sideBar'
+import SideBar from '../Components/SideBar'
 
 
 const Notes = () => {
@@ -66,7 +66,7 @@ const Notes = () => {
             className='px-4 py-2 rounded-full
           text-sm font-medium
           bg-white/10
-          text-white
+          text-whites
           hover:bg-white/20
           transition flex items-center gap-2'>
             📚Your Notes
@@ -125,14 +125,14 @@ const Notes = () => {
       lg:grid lg:grid-cols-4
       gap-6'>   
         <div className='lg:col-span-1'>
-             <SideBars result={result}/>
+             <SideBar result={result.data}/>
         </div>
         <div className='lg:col-span-3
         rounded-2xl
         bg-white
         shadow-[0_15px_40px_rgba(0,0,0,0.15)]
         p-6'>
-          <FinalResult result={result}/>
+          <FinalResult result={result.data}/>
         </div>
           
         </motion.div>}

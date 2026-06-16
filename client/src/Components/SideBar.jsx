@@ -1,6 +1,7 @@
 import React from 'react'
 
 const SideBar = ({ result }) => {
+  console.log("SideBar", result);
   if (!result ||
     !result.subTopics ||
     !result.questions ||
@@ -8,6 +9,11 @@ const SideBar = ({ result }) => {
     !result.questions.long) {
     return null;
   }
+
+  console.log("RESULT:", result);
+console.log("SUBTOPICS:", result?.subTopics);
+console.log("SHORT:", result?.questions?.short);
+console.log("LONG:", result?.questions?.long);
 
   return (
     <div className='bg-white rounded-2xl border border-gray-200 shadow-sm p-5 space-y-6'>
@@ -23,22 +29,24 @@ const SideBar = ({ result }) => {
         </p>
         {
           Object.entries(result.subTopics).map(([star, topic]) => {
-            <div key={star} className='mb-3
+            return (
+              <div key={star} className='mb-3
             rounded-lg
             bg-gray-50
             border border-gray-200
             p-3'>
-              <p className='text-sm font-semibold text-yellow-600 mb-1'>
-                {star} Priority
-              </p>
-              <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
-                {topic.map((t, i) => {
-                  <li key={i}>{t}</li>
-                })}
-              </ul>
-            </div>
+                <p className='text-sm font-semibold text-yellow-600 mb-1'>
+                  {star} Priority
+                </p>
+                <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+                  {topic.map((t, i) => (
+                    <li key={i}>{t}</li>
+                  ))}
+                </ul>
+              </div>
 
 
+            )
           })
         }
       </section>
@@ -63,14 +71,14 @@ const SideBar = ({ result }) => {
         bg-indigo-50 
         border border-ingido-200
         p-3'>
-           <p className='text-sm font-medium text-indigo-700 mb-2'>
-                Short Questions
-              </p>
-              <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
-                {result.questions.short.map((t, i) => {
-                  <li key={i}>{t}</li>
-                })}
-              </ul>
+          <p className='text-sm font-medium text-indigo-700 mb-2'>
+            Short Questions
+          </p>
+          <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+            {result.questions.short.map((t, i) => {
+              return <li key={i}>{t}</li>
+            })}
+          </ul>
 
         </div>
 
@@ -79,14 +87,14 @@ const SideBar = ({ result }) => {
         bg-purple-50 
         border border-ingido-200
         p-3'>
-           <p className='text-sm font-medium text-purple-700 mb-2'>
-                Long Questions
-              </p>
-              <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
-                {result.questions.long.map((t, i) => {
-                  <li key={i}>{t}</li>
-                })}
-              </ul>
+          <p className='text-sm font-medium text-purple-700 mb-2'>
+            Long Questions
+          </p>
+          <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+            {result.questions.long.map((t, i) => {
+              return <li key={i}>{t}</li>
+            })}
+          </ul>
 
         </div>
 
@@ -95,12 +103,12 @@ const SideBar = ({ result }) => {
         bg-blue-50 
         border border-ingido-200
         p-3'>
-           <p className='text-sm font-medium text-blue-700 mb-2'>
-                Diagram Questions
-              </p>
-              <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
-               <li>{result.questions.diagram}</li>
-              </ul>
+          <p className='text-sm font-medium text-blue-700 mb-2'>
+            Diagram Questions
+          </p>
+          <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+            <li>{result.questions.diagram}</li>
+          </ul>
 
         </div>
       </section>
