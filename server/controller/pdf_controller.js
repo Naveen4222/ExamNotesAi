@@ -34,9 +34,9 @@ export const pdfDownload = async(req, res)=>{
             doc.fontSize(13).text(`${star} Topics:`)
         })
 
-        topics.forEach((t)=>{
-            doc.fontSize(12).text(`${t}`)
-        })
+        // result.topics.forEach((t)=>{
+        //     doc.fontSize(12).text(`${t}`)
+        // })
 
         doc.moveDown();
 

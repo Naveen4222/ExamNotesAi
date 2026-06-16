@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Children } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { downloadPdf } from '../services/api'
 
 
 const markDownComponent = {
@@ -72,7 +73,9 @@ const FinalResult = ({ result }) => {
             }`}>
             {quickRevision ? "Exit Revision Mode" : "Quick Revision (5,min)"}
           </button>
-          <button className='px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600
+          <button 
+          onClick={()=>downloadPdf(result)}
+          className='px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600
          text-white hover:bg-indigo-700'>
             Download PDF
           </button>
