@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user.route.js";
 import notesRouter from "./routes/generateNote_route.js";
+import pdfRouter from "./routes/pdf_download.js";
 
 const PORT = process.env.PORT || 5002;
 
@@ -24,7 +25,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", GoogleAuth);
 app.use("/api/user", userRouter);
-app.use("/api/notes", notesRouter)
+app.use("/api/notes", notesRouter);
+
+app.use("/api/pdf", pdfRouter)
 
 
 ConnectDb(app.listen(PORT, ()=>{
